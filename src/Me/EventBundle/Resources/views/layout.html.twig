@@ -1,0 +1,15 @@
+{# src/Me/EventBundle/Resources/views/layout.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {% stylesheets
+        'bundles/event/css/event.css'
+        'bundles/event/css/events.css'
+        'bundles/event/css/main.css'
+        filter='cssrewrite'
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block title 'Events' %}
