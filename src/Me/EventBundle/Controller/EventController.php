@@ -6,6 +6,9 @@ use Me\EventBundle\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 /**
  * Event controller.
  *
@@ -14,6 +17,9 @@ class EventController extends Controller
 {
     /**
      * Lists all event entities.
+     * 
+     * @Template("")
+     * @Route("/", name="events")
      *
      */
     public function indexAction()
