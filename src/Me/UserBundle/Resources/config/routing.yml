@@ -1,0 +1,14 @@
+#app/config/routing.yml
+#..
+user_routes:
+    resource: "@UserBundle/Controller"
+    type: annotation
+    
+# UserBundle_user_annotation:
+#     resource: "@UserBundle/Controller"
+#     prefix: /login
+#     type: annotation
+
+# user_loginpage:
+#     path:     /login
+#     defaults: { _controller: UserBundle:Security:login }

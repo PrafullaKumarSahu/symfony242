@@ -1,0 +1,23 @@
+{# src/Me/UserBundle/Resources/views/Security/login.html.twig #}
+{% extends '::base.html.twig' %}
+{% block body %}
+    <section class="login">
+        <article>
+            {% if error is defined and error %}
+                <div>{{ error.message }}</div>
+            {% endif %}
+
+            <from action="{{ path('login_check') }}" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="_username" value="" />
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="_password" />
+
+                 <input type="hidden" name="_target_path" value="/account" />
+
+                <button type="submit">Login</button>
+            </form>
+        </article>
+    </section>
+{% endblock %}

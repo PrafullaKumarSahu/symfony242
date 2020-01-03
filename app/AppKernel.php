@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Fidry\PsyshBundle\PsyshBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Me\EventBundle\EventBundle(),
+            new Me\UserBundle\UserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
