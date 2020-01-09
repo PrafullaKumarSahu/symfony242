@@ -1,17 +1,20 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        # Symfony\Component\Security\Core\User\User: plaintext
+        Me\UserBundle\Entity\User: bcrypt
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        # in_memory:
+        #     memory:
+        #         users:
+        #             user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+        #             admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        our_database_users: 
+            entity: { class: UserBundle:User, property: username }
 
     firewalls:
         dev:
@@ -32,10 +35,12 @@ security:
                 login_path: /login
             logout:
                 path:   logout # a route called logout
-                target: event # a route called event
+                target: events # a route called event
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        #- { path: ^/new, roles: ROLE_USER }
+        #- { path: ^/create, roles: ROLE_USER }

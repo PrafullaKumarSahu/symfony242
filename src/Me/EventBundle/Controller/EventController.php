@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Event controller.
@@ -15,6 +16,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  */
 class EventController extends Controller
 {
+    //throws execeptions
+    private function enforceUserSecurity()
+    {
+        $securityContext = $this->container->get('security.context');
+        if ( ! $securityContext->isGranted('ROLE_USER') ) {
+            throw new AccessDeniedException('Need ROLE_USER!');
+        }
+    }
     /**
      * Lists all event entities.
      * 
@@ -39,6 +48,7 @@ class EventController extends Controller
      */
     public function newAction(Request $request)
     {
+        $this->enforceUserSecurity();
         $event = new Event();
         $form = $this->createForm('Me\EventBundle\Form\EventType', $event);
         $form->handleRequest($request);
@@ -77,6 +87,7 @@ class EventController extends Controller
      */
     public function editAction(Request $request, Event $event)
     {
+        $this->enforceUserSecurity();
         $deleteForm = $this->createDeleteForm($event);
         $editForm = $this->createForm('Me\EventBundle\Form\EventType', $event);
         $editForm->handleRequest($request);
@@ -100,6 +111,7 @@ class EventController extends Controller
      */
     public function deleteAction(Request $request, Event $event)
     {
+        $this->enforceUserSecurity();
         $form = $this->createDeleteForm($event);
         $form->handleRequest($request);
 
